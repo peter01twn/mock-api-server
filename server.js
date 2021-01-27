@@ -7,12 +7,6 @@ const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
-const options = {
-    key: fs.readFileSync('./ssl/server.key'),
-    cert: fs.readFileSync('./ssl/server.crt'),
-    // ca: [fs.readFileSync('./cert.pem')],
-};
-
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use(multer().none());
@@ -43,6 +37,10 @@ router.render = (req, res) => {
 };
 server.use(router);
 
+const options = {
+    key: fs.readFileSync('./ssl/server.key'),
+    cert: fs.readFileSync('./ssl/server.crt'),
+};
 const port = process.env.PORT || 3000;
 https.createServer(options, server).listen(port, () => {
     console.log(port);
