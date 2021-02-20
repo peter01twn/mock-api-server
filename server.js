@@ -17,8 +17,7 @@ server.get('/user', (req, res) => {
 server.get('/static', (req, res) => {
     get({Key: 'test.txt'})
         .then(data => {
-            res.body = data.Body;
-            res.end();
+            res.send(data.Body);
         });
 });
 
