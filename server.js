@@ -1,7 +1,6 @@
 import jsonServer from 'json-server';
 import multer from 'multer';
-import { get } from './aws-s3';
-
+import { get } from './aws-s3.js';
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
@@ -15,7 +14,7 @@ server.get('/user', (req, res) => {
     res.json('asdasd');
 });
 
-server.get('/static/', (req, res) => {
+server.get('/static', (req, res) => {
     get({Key: 'test.txt'})
         .then(data => {
             res.body = data.Body;
